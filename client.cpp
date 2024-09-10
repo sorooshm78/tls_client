@@ -28,8 +28,9 @@ SSL_CTX* CreateClientContext() {
 }
 
 void ConfigureClientContext(SSL_CTX* ctx) {
-    // Set the trust store for the client
-    if (!SSL_CTX_load_verify_locations(ctx, "server.crt", nullptr)) {
+	const char* cert_path = "../cert/server.crt";
+    
+	if (!SSL_CTX_load_verify_locations(ctx, cert_path, nullptr)) {
         ERR_print_errors_fp(stderr);
         exit(EXIT_FAILURE);
     }
